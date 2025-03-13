@@ -1,0 +1,10 @@
+@import "tailwindcss";
+/* @plugin "daisyui"; */
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+div > h1 {
+  font-family: "pacifino", cursive;
+}
