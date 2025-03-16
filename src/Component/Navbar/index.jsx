@@ -5,9 +5,11 @@ import { MdMenu } from "react-icons/md";
 import { NavLink } from "react-router";
 import { CiSearch } from "react-icons/ci";
 import { RxCross2 } from "react-icons/rx";
-
+import { useSelector } from "react-redux";
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const cartLength = useSelector((state) => state.cart.cartItems?.length);
+
   return (
     <nav className="bg-fuchsia-100 px-7 fixed top-0 left-0 w-full shadow-lg z-50 lg:flex justify-around items-center">
       <div className="flex justify-between p-4">
@@ -54,10 +56,15 @@ const Navbar = () => {
         <CiSearch />
       </div>
       <div className="hidden lg:flex  justify-center gap-5 items-center  ">
+        <NavLink to="/services">
+          <div className="hidden md:flex">
+            <CiSearch />
+          </div>
+        </NavLink>
         <NavLink to="/cart" className="flex">
           <GiShoppingCart size={30} />
           <div className="bg-red-600 w-5 h-5 rounded-full">
-            <p className="text-center text-white ">0</p>
+            <p className="text-center text-white ">{cartLength}</p>
           </div>
         </NavLink>
         <NavLink
@@ -98,7 +105,7 @@ const Navbar = () => {
             <NavLink to="/cart" className="flex">
               <GiShoppingCart size={30} />
               <div className="bg-red-600 w-5 h-5 rounded-full">
-                <p className="text-center text-white ">0</p>
+                <p className="text-center text-white ">{cartLength}</p>
               </div>
             </NavLink>
             <NavLink
