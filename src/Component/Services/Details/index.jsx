@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/actions/cart";
 
 const DetailPage = () => {
   const { id } = useParams();
   const [details, setDetails] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  const dispatch = useDispatch();
+
   const productDetails = async () => {
     try {
       setIsLoading(true);
@@ -22,6 +26,9 @@ const DetailPage = () => {
     productDetails();
   }, [id]);
 
+  const handleAddToCart = (data) => {
+    dispatch(addToCart(data)); // Dispatch addToCart action
+  };
   return (
     <div className="mt-20 p-7 md:grid grid-cols-2">
       {isLoading ? (
@@ -46,7 +53,10 @@ const DetailPage = () => {
             </p>
             <p className="mt-4 font-bold">${details?.price}</p>
             <div className="flex gap-7">
-              <button className="rounded-2xl mt-4 bg-gradient-to-r from-fuchsia-300 to-fuchsia-800 font-bold p-3 w-30 text-center ">
+              <button
+                onClick={() => handleAddToCart(details)}
+                className="rounded-2xl mt-4 bg-gradient-to-r from-fuchsia-300 to-fuchsia-800 font-bold p-3 w-30 text-center "
+              >
                 Add to Cart
               </button>
               <button className="rounded-2xl mt-4 bg-gradient-to-r from-fuchsia-300 to-fuchsia-600 font-bold p-3 w-30 text-center ">

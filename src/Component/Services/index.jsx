@@ -3,45 +3,35 @@ import axios from "axios";
 import Button from "../reusable/Button";
 import { Link } from "react-router"; // Corrected import
 import SearchBar from "../reusable/Search";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchProductsRequest } from "../../redux/actions/product";
 
 const Services = () => {
-  const [products, setProducts] = useState([]);
-  const [filter, setFilter] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [products, setProducts] = useState([]);
+  // const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
+  const [category, setCategory] = useState("All");
 
-  const getProduct = async () => {
-    try {
-      setIsLoading(true);
-      const res = await axios.get("https://fakestoreapi.com/products");
-      setProducts(res.data);
-      setFilter(res.data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const dispatch = useDispatch();
+  const { products, isLoading } = useSelector((state) => state.product);
 
   useEffect(() => {
-    getProduct();
-  }, []);
+    dispatch(fetchProductsRequest());
+  }, [dispatch]);
 
-  const handleFilter = (category) => {
-    if (category === "All") {
-      setFilter(products);
-    } else {
-      const filteredCategory = products.filter((item) =>
-        item.category.toLowerCase().includes(category.toLowerCase())
-      );
-      setFilter(filteredCategory);
-    }
+  const handleFilter = (selectedCategory) => {
+    setCategory(selectedCategory);
   };
 
-  // Apply search filter on top of category filter
-  const filteredProducts = filter.filter((product) =>
-    product.title.toLowerCase().includes(searchQuery.toLowerCase())
-  );
+  const filteredProducts = products
+    .filter((product) =>
+      product.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    .filter(
+      (product) =>
+        category === "All" ||
+        product.category.toLowerCase().includes(category.toLowerCase())
+    );
 
   return (
     <div className="mt-20 px-10">

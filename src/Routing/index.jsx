@@ -8,7 +8,7 @@ import Navbar from "../Component/Navbar/index.jsx";
 import CartPage from "../Component/reusable/Cart/index.jsx";
 import LoginPage from "../Component/reusable/Login/index.jsx";
 import DetailPage from "../Component/Services/Details/index.jsx";
-import Footer from "../Component/Contact/Footer/index.jsx";
+
 const CombineRoute = () => {
   return (
     <BrowserRouter>
@@ -22,7 +22,6 @@ const CombineRoute = () => {
         <Route path="/services/:id" element={<DetailPage />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-      {/* <Footer /> */}
     </BrowserRouter>
   );
 };
