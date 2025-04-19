@@ -1,15 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { rootreducer } from "../reducer";
 import createSagaMiddleware from "redux-saga";
-import { watchFetchProducts } from "../sagas";
+import rootSaga from "../sagas";
 
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware(); //middleware handling side effect (asynchronous action,api calls) when dispatch
 
 const store = configureStore({
-  reducer: rootreducer,
+  //configureStore creates redux store
+  reducer: rootreducer, //combine all reducers in single
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(watchFetchProducts);
+sagaMiddleware.run(rootSaga);
 export default store;

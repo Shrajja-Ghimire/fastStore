@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Button from "../reusable/Button";
-import { Link } from "react-router"; // Corrected import
+import { Link } from "react-router";
 import SearchBar from "../reusable/Search";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProductsRequest } from "../../redux/actions/product";
+import { MdAddShoppingCart } from "react-icons/md";
+import { addToCart } from "../../redux/actions/cart";
 
 const Services = () => {
-  // const [products, setProducts] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [category, setCategory] = useState("All");
 
   const dispatch = useDispatch();
+  //useSelector used to select state from redux store
   const { products, isLoading } = useSelector((state) => state.product);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const Services = () => {
 
   return (
     <div className="mt-20 px-10">
-      <h1 className="text-cyan-950 text-center text-2xl font-bold mb-8 border-b border-cyan-950 inline-block w-full">
+      <h1 className="text-indigo-900 p-1 text-center text-2xl font-bold mb-8 inline-block w-full">
         Latest Products
       </h1>
 
@@ -43,12 +43,12 @@ const Services = () => {
       <SearchBar search={searchQuery} setSearch={setSearchQuery} />
 
       {/* Filter Buttons */}
-      <div className="mt-3 block p-2 md:flex justify-center items-center gap-4">
+      <div className="mt-3 block p-2 md:flex justify-center items-center gap-4 ">
         {["All", "Men", "Women", "jewelery", "electronics"].map((category) => (
           <button
             key={category}
             onClick={() => handleFilter(category)}
-            className="block bg-fuchsia-50 w-30 mb-2 p-1"
+            className="text-indigo-900 block w-30 mb-2 p-1 rounded-2xl shadow-lg bg-gradient-to-r from-slate-100 to-slate-300 hover:text-indigo-700"
           >
             {category.charAt(0).toUpperCase() + category.slice(1)}
           </button>
@@ -79,9 +79,18 @@ const Services = () => {
                   <p className="text-gray-600 text-sm font-bold">
                     ${product.price}
                   </p>
-                  <Link to={`/services/${product.id}`}>
-                    <Button name="View..." />
-                  </Link>
+                  <div className="flex justify-center items-baseline gap-5">
+                    <Link to={`/services/${product.id}`}>
+                      <Button name="View..." />
+                    </Link>
+
+                    <button
+                      className="w-10 p-2 font-bold text-indigo-400 hover:text-indigo-800"
+                      onClick={() => dispatch(addToCart(product))}
+                    >
+                      <MdAddShoppingCart />
+                    </button>
+                  </div>
                 </div>
               </div>
             ))

@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../assets/GoodShop.jpg";
 import { GiShoppingCart } from "react-icons/gi";
 import { MdMenu } from "react-icons/md";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { CiSearch } from "react-icons/ci";
 import { RxCross2 } from "react-icons/rx";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../../redux/actions/auth";
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
   const cartLength = useSelector((state) => state.cart.cartItems?.length);
 
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate("/login");
+  };
+
+  if (!isAuthenticated) return null;
+
   return (
-    <nav className="bg-fuchsia-100 px-7 fixed top-0 left-0 w-full shadow-lg z-50 lg:flex justify-around items-center">
+    <nav className="bg-slate-300 px-7 fixed top-0 left-0 w-full shadow-lg z-50 lg:flex justify-around items-center">
       <div className="flex justify-between p-4">
         <NavLink to="/" className="flex gap-3 items-center ">
           <img src={logo} alt="logo" className="w-10 h-10 rounded-full" />
-          <p className="text-bold text-2xl cursor-pointer font-bold">
+          <p className="text-bold text-indigo-900 text-2xl cursor-pointer font-bold">
             FAST STORES
           </p>
         </NavLink>
@@ -26,11 +39,11 @@ const Navbar = () => {
       </div>
 
       {/* Desktop list */}
-      <ul className="hidden lg:flex gap-20 items-center">
+      <ul className="hidden lg:flex gap-20 items-center text-indigo-950">
         <NavLink
-          to="/hero"
+          to="/"
           className={({ isActive }) =>
-            isActive ? "text-fuchsia-500 font-bold" : "hover:text-fuchsia-900"
+            isActive ? "text-indigo-900 font-bold" : "hover:text-indigo-700"
           }
         >
           Home
@@ -38,7 +51,7 @@ const Navbar = () => {
         <NavLink
           to="/services"
           className={({ isActive }) =>
-            isActive ? "text-fuchsia-500 font-bold" : "hover:text-fuchsia-900"
+            isActive ? "text-indigo-900  font-bold" : "hover:text-indigo-700"
           }
         >
           Services
@@ -46,7 +59,7 @@ const Navbar = () => {
         <NavLink
           to="/contact"
           className={({ isActive }) =>
-            isActive ? "text-fuchsia-600 font-bold" : "hover:text-fuchsia-900"
+            isActive ? "text-indigo-900  font-bold" : "hover:text-indigo-700"
           }
         >
           Contact
@@ -67,12 +80,20 @@ const Navbar = () => {
             <p className="text-center text-white ">{cartLength}</p>
           </div>
         </NavLink>
-        <NavLink
-          to="/login"
-          className="p-1 font-bold border-1 border-slate-200 rounded-2xl"
-        >
-          Login
-        </NavLink>
+
+        <div className="flex items-center gap-2 p-2 bg-white rounded-md shadow-sm">
+          <img
+            src={user.image}
+            alt="User Avatar"
+            className="w-8 h-8 rounded-full object-cover"
+          />
+          <button
+            onClick={handleLogout}
+            className="bg-slate-500 hover:bg-slate-700 text-white px-3 py-1.5 text-xs rounded-md transition duration-150"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
       {/* mobile screen */}
@@ -80,7 +101,7 @@ const Navbar = () => {
         <>
           <ul className="block text-center lg:hidden ">
             <NavLink
-              to="/hero"
+              to="/"
               className="block p-3 border-b border-gray-200 shadow-lg rounded-2xl"
               onClick={() => setOpen(false)}
             >
@@ -108,19 +129,28 @@ const Navbar = () => {
                 <p className="text-center text-white ">{cartLength}</p>
               </div>
             </NavLink>
-            <NavLink
-              to="/login"
-              className="p-2 font-bold border-1 border-slate-200 shadow-lg rounded-2xl "
-            >
-              Login
-            </NavLink>
+            {user ? (
+              <button
+                onClick={handleLogout}
+                className="text-indigo-900 p-2 font-bold rounded-lg shadow-lg"
+              >
+                Logout
+              </button>
+            ) : (
+              <NavLink
+                to="/login"
+                className="p-2 font-bold shadow-lg rounded-lg text-indigo-900 "
+              >
+                Login
+              </NavLink>
+            )}
             <NavLink to="/services">
               <div className="flex lg:hidden">
                 <CiSearch />
               </div>
             </NavLink>
             <NavLink
-              className="flex bg-gray-600 text-white lg:hidden"
+              className="flex lg:hidden hover:bg-red-800 hover:text-white"
               onClick={() => setOpen(false)}
             >
               <RxCross2 />
