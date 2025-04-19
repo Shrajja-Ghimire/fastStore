@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import store from "./redux/stores/index.jsx";
 
 createRoot(document.getElementById("root")).render(
+  //provider wrapper takes store as the props
   <Provider store={store}>
     <StrictMode>
       <CombineRoute />

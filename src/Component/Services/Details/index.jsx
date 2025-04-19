@@ -26,8 +26,8 @@ const DetailPage = () => {
     productDetails();
   }, [id]);
 
-  const handleAddToCart = (data) => {
-    dispatch(addToCart(data)); // Dispatch addToCart action
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product)); // Dispatch addToCart action
   };
   return (
     <div className="mt-20 p-7 md:grid grid-cols-2">
@@ -55,12 +55,9 @@ const DetailPage = () => {
             <div className="flex gap-7">
               <button
                 onClick={() => handleAddToCart(details)}
-                className="rounded-2xl mt-4 bg-gradient-to-r from-fuchsia-300 to-fuchsia-800 font-bold p-3 w-30 text-center "
+                className="text-white text-sm rounded-2xl mt-4 bg-gradient-to-r from-slate-400 to-slate-600 font-bold p-2 w-30 text-center "
               >
                 Add to Cart
-              </button>
-              <button className="rounded-2xl mt-4 bg-gradient-to-r from-fuchsia-300 to-fuchsia-600 font-bold p-3 w-30 text-center ">
-                Buy Now
               </button>
             </div>
           </div>

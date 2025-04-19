@@ -1,25 +1,11 @@
-import { takeEvery, put, call } from "redux-saga/effects";
-import * as actions from "../actions/product";
+import { all } from "redux-saga/effects";
+import authSaga from "./auth";
+import { watchFetchProducts } from "./product";
 
-const fetchProductsFromAPI = async () => {
+export default function* rootSaga() {
   try {
-    const response = await fetch("https://fakestoreapi.com/products");
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw error;
+    yield all([authSaga(), watchFetchProducts()]);
+  } catch (err) {
+    console.error("Root saga error:", err);
   }
-};
-
-function* fetchProducts() {
-  try {
-    const data = yield call(fetchProductsFromAPI);
-    yield put(actions.fetchProductsSuccess(data));
-  } catch (error) {
-    yield put(actions.fetchProductsFailure(error.message));
-  }
-}
-
-export function* watchFetchProducts() {
-  yield takeEvery("FETCH_PRODUCTS_REQUEST", fetchProducts);
 }

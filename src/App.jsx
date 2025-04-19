@@ -8,7 +8,7 @@ import Services from "./Component/Services";
 function App() {
   return (
     <div className="container mx-auto  ">
-      <Navbar />
+      {/* <Navbar /> */}
       <Homepage />
       <Services />
       <Contact />

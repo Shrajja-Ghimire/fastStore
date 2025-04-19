@@ -1,9 +1,13 @@
-export const addToCart = (data, product) => ({
+export const addToCart = (product) => ({
   type: "ADD_TO_CART",
-  payload: { data, product },
+  payload: product,
 });
 
-export const removeFromCart = (id) => ({
+export const removeFromCart = (productId) => ({
   type: "REMOVE_FROM_CART",
-  payload: id,
+  payload: productId,
+});
+
+export const clearCart = () => ({
+  type: "CLEAR_CART",
 });
