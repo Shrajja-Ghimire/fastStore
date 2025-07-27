@@ -1,41 +1,41 @@
-// src/components/Footer.js
-import React from "react";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagramSquare } from "react-icons/fa";
+import { FaFacebook, FaInstagramSquare } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-500 px-7 fixed bottom-0 left-0 w-full shadow-lg z-50 ">
-      <div className="md:flex md:justify-center gap-10 p-5">
-        {/* Contact Section */}
-        <div className="mb-6 md:mb-0">
-          <h4 className="text-lg font-semibold mb-3">Contact</h4>
-          <p>Email: support@example.com</p>
-          <p>Phone: 123-456-7890</p>
+    <footer className="bg-slate-300 ">
+      <div className="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-2 gap-10">
+        {/* Contact */}
+        <div>
+          <h4 className="text-2xl font-bold mb-3 text-indigo-950">
+            Contact Us
+          </h4>
+          <p className="text-sm cursor-pointer">📧 faststore@gmail.com</p>
+          <p className="text-sm cursor-pointer">📞 123-456-7890</p>
         </div>
 
-        {/* Follow Us Section */}
+        {/* Social Media */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Follow Us</h4>
-          <ul>
-            <li className="flex gap-5 items-center">
+          <h4 className="text-2xl font-bold mb-3 text-indigo-950">Follow Us</h4>
+          <div className="flex gap-6 text-2xl">
+            <a href="#" className="text-blue-700 transition">
               <FaFacebook />
-              <p>Facebook</p>
-            </li>
-            <li className="flex gap-5 items-center">
+            </a>
+            <a href="#" className="text-pink-600 transition">
               <FaInstagramSquare />
-              <p>Instagram</p>
-            </li>
-          </ul>
+            </a>
+          </div>
         </div>
-        <div className="border-t border-gray-700 mt-8 pt-4 text-center text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} FAST STORES. All rights reserved.
-          </p>
-        </div>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="bg-slate-200 border-t border-slate-400 text-center text-sm py-4">
+        <p>
+          &copy; {new Date().getFullYear()}{" "}
+          <span className="font-semibold">FAST STORES</span>. All rights
+          reserved.
+        </p>
       </div>
     </footer>
   );
 };
-
 export default Footer;

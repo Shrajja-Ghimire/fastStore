@@ -10,6 +10,7 @@ import LoginPage from "../Component/reusable/Login/index.jsx";
 import DetailPage from "../Component/Services/Details/index.jsx";
 import Register from "../Component/reusable/Register/index.jsx";
 import ProtectedRoute from "../ProtectedRoute/index.jsx";
+import Footer from "../Component/Contact/Footer/index.jsx";
 
 const CombineRoute = () => {
   return (

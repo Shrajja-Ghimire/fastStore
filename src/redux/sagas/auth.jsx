@@ -17,7 +17,7 @@ function* loginSaga(action) {
     // Mocked user image, as the API doesn’t return user data
     const user = {
       token: res.data.token,
-      image: "https://i.pravatar.cc/150?img=3",
+      image: "https://i.pravatar.cc/150?img=5",
     };
     yield put(loginSuccess(user));
   } catch (error) {

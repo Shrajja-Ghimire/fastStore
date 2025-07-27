@@ -14,16 +14,18 @@ const CartPage = () => {
 
   return (
     <div className="mt-20 mb-10 p-10 border border-gray-200 rounded-3xl shadow-lg max-w-4xl mx-auto">
-      <h1 className="text-cyan-950 text-center text-3xl font-bold mb-10">
-        🛒 Your Shopping Cart
+      <h1 className="text-indigo-900 text-center text-3xl font-bold mb-10">
+        Your Shopping Cart
       </h1>
 
       {cartItems.length === 0 ? (
         <p className="text-center text-gray-500 text-lg">
-          Your cart is empty!{" "}
-          <span className="text-blue-600 hover:underline cursor-pointer">
-            Shop Now
-          </span>
+          Your cart is empty!
+          <NavLink to="/services">
+            <span className="text-blue-600 hover:underline cursor-pointer">
+              Shop Now
+            </span>
+          </NavLink>
         </p>
       ) : (
         <div>
@@ -66,15 +68,14 @@ const CartPage = () => {
             <p>Total Amount:</p>
             <p className="text-amber-600">${totalAmount.toFixed(2)}</p>
           </div>
-
-          <NavLink to="/services">
-            <div className="mt-8 flex items-center underline text-gray-400 cursor-pointer hover:text-black">
-              <BiLeftArrowAlt />
-              <p className="">Back to shop</p>
-            </div>
-          </NavLink>
         </div>
       )}
+      <NavLink to="/services">
+        <div className="mt-8 flex items-center underline text-gray-400 cursor-pointer hover:text-black">
+          <BiLeftArrowAlt />
+          <p className="">Back to shop</p>
+        </div>
+      </NavLink>
     </div>
   );
 };

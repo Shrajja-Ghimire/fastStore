@@ -1,41 +1,47 @@
 import React from "react";
-
+import Footer from "./Footer";
 const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
   return (
-    <div className=" mt-25 px-8  md:flex justify-center">
-      <div className="w-full max-w-lg shadow-lg rounded-lg p-6 md:p-10">
-        <p className="text-3xl text-center font-bold pb-6">Contact with us</p>
-        <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Enter your name"
-            name="name"
-            className="w-full h-12 border border-gray-300 bg-white p-4 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 transition"
-          />
+    <div>
+      <div className="mt-18 px-4 md:px-8 flex justify-center bg-slate-100 py-16">
+        <div className="w-full max-w-xl bg-white shadow-2xl rounded-2xl p-5 md:p-10 border border-slate-200">
+          <p className="text-4xl text-center font-extrabold text-slate-700 pb-6">
+            Contact Us
+          </p>
+          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              placeholder="Your Name"
+              name="name"
+              className="w-full h-12 border border-slate-300 bg-slate-50 p-4 rounded-lg focus:outline-none transition"
+            />
 
-          <input
-            type="email"
-            placeholder="Enter your email"
-            name="email"
-            className="w-full h-12 border border-gray-300 bg-white p-4 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 transition"
-          />
+            <input
+              type="email"
+              placeholder="Your Email"
+              name="email"
+              className="w-full h-12 border border-slate-300 bg-slate-50 p-4 rounded-lg focus:outline-none transition"
+            />
 
-          <textarea
-            placeholder="Your message"
-            className="w-full h-32 border border-gray-300 bg-white p-4 rounded-lg focus:outline-none focus:ring-1 focus:ring-amber-500 transition"
-          />
+            <textarea
+              placeholder="Write your message..."
+              name="message"
+              className="w-full h-32 border border-slate-300 bg-slate-50 p-4 rounded-lg focus:outline-nonetransition resize-none"
+            />
 
-          <button
-            type="submit"
-            className="bg-gradient-to-r from-fuchsia-500 to-fuchsia-800 text-white p-3 rounded-lg w-full md:w-auto font-semibold hover:shadow-md transform hover:scale-105 transition-all"
-          >
-            Send Message
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="bg-gradient-to-tl from-blue-800 to-indigo-900 text-white p-3 rounded-lg w-full md:w-auto font-semibold shadow-md hover:shadow-lg transform hover:scale-95 transition-all"
+            >
+              Send Message
+            </button>
+          </form>
+        </div>
       </div>
+      <Footer />
     </div>
   );
 };
