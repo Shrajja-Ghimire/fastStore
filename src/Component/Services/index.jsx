@@ -85,7 +85,7 @@ const Services = () => {
                     </Link>
 
                     <button
-                      className="w-10 p-2 font-bold text-indigo-400 hover:text-indigo-800"
+                      className="w-10 p-2 font-extrabold text-red-700 hover:text-indigo-800"
                       onClick={() => dispatch(addToCart(product))}
                     >
                       <MdAddShoppingCart />

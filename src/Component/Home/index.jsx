@@ -23,8 +23,6 @@ const Homepage = () => {
         </div>
       </span>
       <SliderPage />
-      <Services />
-      <Contact />
     </div>
   );
 };
